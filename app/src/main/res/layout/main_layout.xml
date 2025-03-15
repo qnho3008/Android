@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -8,37 +9,105 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/solve"
+    <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Sum (Linear Layout)"
+        android:text="QUADRATIC EQUATION"
+        android:textColor="#211C84"
         android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textSize="30sp"
+        android:textStyle="bold"
+        />
 
-    <Button
-        android:id="@+id/constrainSum"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Sum (Constrain Layout)"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter number A"
+            android:textColor="#211C84"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="5dp"
+            />
 
-    <Button
-        android:id="@+id/linearEqua"
+        <EditText
+            android:id="@+id/numA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="9999"
+            android:inputType="numberSigned"
+            android:textSize="20sp"
+            android:padding="5dp"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Linear Equation"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:layout_margin="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter number B"
+            android:textColor="#211C84"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="5dp"
+            />
 
+        <EditText
+            android:id="@+id/numB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="9999"
+            android:inputType="numberSigned"
+            android:textSize="20sp"
+            android:padding="5dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter number C"
+            android:textColor="#211C84"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="5dp"
+            />
+
+        <EditText
+            android:id="@+id/numC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="9999"
+            android:inputType="numberSigned"
+            android:textSize="20sp"
+            android:padding="5dp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/solveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SOLVE"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"/>
 </LinearLayout>

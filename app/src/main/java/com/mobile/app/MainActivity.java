@@ -3,22 +3,23 @@ package com.mobile.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.mobile.app.activities.LinearEquation;
-import com.mobile.app.activities.Sum_ConstrainLayout;
-import com.mobile.app.activities.Sum_LinearLayout;
+import com.mobile.app.activities.ResultActivity;
+
+import java.util.Optional;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    Button constrainSum,linearSum,linearEqua;
+    EditText numA, numB, numC;
+    Button solveBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +28,12 @@ public class MainActivity extends AppCompatActivity {
         //setContentView(R.layout.sum_constrain_layout);
         setContentView(R.layout.main_layout);
 
-        linearEqua = findViewById(R.id.linearEqua);
-        linearSum = findViewById(R.id.solve);
-        constrainSum = findViewById(R.id.constrainSum);
+        numA = findViewById(R.id.numA);
+        numB = findViewById(R.id.numB);
+        numC = findViewById(R.id.numC);
 
-        linearEqua.setOnClickListener(v -> linearEquation());
-        linearSum.setOnClickListener(v -> linearSumLayout());
-        constrainSum.setOnClickListener(v -> constrainSumLayout());
+        solveBtn = findViewById(R.id.solveBtn);
+        solveBtn.setOnClickListener(v -> solveBtnOnClick());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -43,26 +43,53 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void linearSumLayout()
+    private void solveBtnOnClick()
     {
-        switchIntent(Sum_LinearLayout.class);
+
+        String strA = numA.getText().toString();
+        String strB = numB.getText().toString();
+        String strC = numC.getText().toString();
+
+        if(strA.isEmpty() || strB.isEmpty() || strC.isEmpty())
+        {
+            return;
+        }
+
+        String result = solve(strA,strB, strC);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("result", result);
+        switchIntent(ResultActivity.class, bundle);
     }
 
-    public void constrainSumLayout()
+    private String solve(String strA, String strB, String strC)
     {
-        switchIntent(Sum_ConstrainLayout.class);
+        double a = Double.parseDouble(strA);
+        double b = Double.parseDouble(strB);
+        double c = Double.parseDouble(strC);
+        double delta = b * b - 4 * a * c;
+
+        String result;
+        if(delta < 0)
+        {
+            result = "Không tồn tại nghiệm";
+        } else if (delta ==0 ) {
+            result = "Nghiệm kép: " + (-b / (2 * a));
+        }else {
+            double x1 = (-b + Math.sqrt(delta)) / (2 * a);
+            double x2 = (-b - Math.sqrt(delta)) / (2 * a);
+            result = "Phương trình có 2 nghiệm: " + x1 + " và " + x2;
+        }
+        return result;
     }
 
-    public void linearEquation()
-    {
-        switchIntent(LinearEquation.class);
-    }
-
-    private void switchIntent(Class<?> T)
+    private void switchIntent(Class<?> T, Bundle bundle)
     {
         Intent intent = new Intent(this, T);
+        if(bundle != null)
+        {
+            intent.putExtras(bundle);
+        }
         startActivity(intent);
     }
-
-
 }
